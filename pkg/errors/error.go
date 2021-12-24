@@ -55,6 +55,10 @@ if err != nil {
 }
 */
 func (e *AppError) Wrap(next error) *AppError {
-	e.err = next
-	return e
+	return &AppError{
+		HttpStatus: e.HttpStatus,
+		Code:       e.Code,
+		Message:    e.Message,
+		err:        next,
+	}
 }
